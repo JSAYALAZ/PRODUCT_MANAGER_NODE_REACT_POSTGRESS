@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { ActionFunctionArgs, Link, useLoaderData } from "react-router-dom";
 import { getProducts } from "../Services/ProductService";
 import ProductsDetails from "../Components/ProductsDetails";
 import { ProductType } from "../types";
@@ -7,6 +7,12 @@ export async function loader() {
   const products = await getProducts();
   return products;
 }
+export async function action({request}:ActionFunctionArgs){
+  const data = Object.fromEntries(await request.formData())
+  
+  return {}
+}
+
 
 export default function Products() {
   const products = useLoaderData() as ProductType[]
